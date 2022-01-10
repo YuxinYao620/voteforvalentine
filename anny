@@ -1,0 +1,59 @@
+# Randomly pick a starting point ~x.
+N  = dimension of vector x
+
+# counter for number of sampling 
+sample = 0
+# add evaluted Q(x) each time
+historyX = []
+historyE = []
+# choose a new starting point of x when the x is stable
+for counter = 0,...,10:
+    x = array of dimension N
+    for i= 0,...,N-1:
+        x[i] = random number 
+        
+    while True:
+        delta_energy, updated_x+= metropolis(x)
+        historyX.append(updated_x)
+        historyE.append(delta_energy)
+        x = updated_x
+        sample += 1
+        if (historyE[-4]+historyE[-3]+historyE[-2])/3 - historyE[-1] < 0.01:
+            return x
+            #end of algorithm  
+
+averaged_Q = total_Q/sample
+
+####
+Def T(E):
+    # function relative to E, the greater the E, the greater the T, vice versa
+    return T calculated from E
+Def E(x):
+    return the energy calculated from vector x.
+####
+def metropolis(x):
+    # Px = exp(-(E(x)/KBT))/Z #calculate P(x)
+    E1 = E(x)
+    for ind = 0,...,N-1:
+        xdash[ind] = x[ind] + random number between 0 and 1
+    E2 = E(xdash)#calculate P(x')
+
+    pacc = 0
+    deltaE = E2-E1 #CALCULATE the change of energy 
+    Temperature = T(E1)
+    if deltaE < 0: 
+        pacc = 1
+    else:
+        pacc = exp(-deltaE/(Kb*Temperature))
+        
+    # generate a random number between 0 and 1 to decide whether accept the xdash 
+    resultx = x
+    posibility = random number between 0 and 1 
+    if posibility<pacc:
+        x = xdash
+    
+    return deltaE,x
+
+
+    
+
